@@ -14,13 +14,10 @@ export class HomeComponent implements OnInit {
   message: string = "Nacionales";
   subscription: Subscription;
   showinfo: boolean;
+  listInfo:any;
 
   constructor(private messageService: MessageService, private NewsServices:NewsServices) {
     this.showinfo = false;
-    if (sessionStorage.getItem('page')) {
-      this.loadNewsforType('Nacionales');
-      sessionStorage.removeItem('page');
-    }
     this.subscription = this.messageService.getMessage().subscribe(message => {
       if (message) {
         this.message = message.text;
@@ -32,7 +29,7 @@ export class HomeComponent implements OnInit {
 
   loadNewsforType(message: string) {
     this.NewsServices.requestNews(message).subscribe(res=>{
-      console.log(res);
+      this.listInfo =  res;
     });
     this.showinfo = true;
   }
@@ -42,6 +39,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.loadNewsforType('Nacionales');
   }
 }

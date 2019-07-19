@@ -10,7 +10,6 @@ import { MessageService } from '../../services/MessageService';
 export class ContainerComponent implements OnInit {
 
   constructor(private _router: Router,private messageService: MessageService) {
-    sessionStorage.setItem('page', JSON.stringify(1));
    }
 
   ngOnInit() {

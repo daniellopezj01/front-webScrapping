@@ -1,7 +1,60 @@
 <mat-spinner class="spinner" *ngIf="!showinfo"></mat-spinner>
 <br><br>
 <br>
+<br><br>
+<br>
 <br>
 <div *ngIf="showinfo">
-    <h1>{{message}}</h1>
+    <h1> <strong>Conoce lo mas reciente acerca de {{message}} </strong> </h1>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <table class="table table-striped" [mfData]="listInfo" #mf="mfDataTable" [mfRowsOnPage]="10">
+        <div *ngFor="let item of mf.data">
+            <div class=" offset-md-1 col-md-5 my-5 " style="float: left">
+                {{item.titulo}}
+                <!-- <mdb-card dark="true"> 
+                    <mdb-card-head class="elegant-color white-text">
+                        <mdb-card-title>
+                            <br>
+                            <h4><strong> Proyecto </strong> {{item.titulo}} </h4>
+                        </mdb-card-title>
+                    </mdb-card-head>
+                    <div style="height:  250px; width:  100%;" class="overlay waves-light" mdbWavesEffect>
+                         <img src="http://localhost:3000/loadFile/{{item.disenio}}" class=" estilosImg">
+                    </div>
+                    <mdb-card-body class="elegant-color white-text">
+                        <mdb-card-title>
+                            <h4>{{item.url}} </h4>
+                        </mdb-card-title>
+                        <hr class="hr-light">
+                        <mdb-card-text class="white-text">
+                            <strong> <b>descripcion: </b></strong> {{item.descripcion}} <br> <strong> <b>fecha: </b></strong> {{item.fecha.slice(0, -14)}} <br>
+                        </mdb-card-text>
+                    </mdb-card-body>
+                </mdb-card> -->
+            </div>
+        </div>
+        <tfoot>
+            <tr>
+                <td colspan="4">
+                    <mfBootstrapPaginator></mfBootstrapPaginator>
+                </td>
+            </tr>
+        </tfoot>
+
+    </table>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 </div>
