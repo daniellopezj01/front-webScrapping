@@ -1,3 +1,4 @@
+import { NewsServices } from './../../services/NewsServices';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
@@ -14,24 +15,26 @@ export class HomeComponent implements OnInit {
   subscription: Subscription;
   showinfo: boolean;
 
-  constructor(private messageService: MessageService) {
-    this.showinfo =  false;
-    if(sessionStorage.getItem('page')){
+  constructor(private messageService: MessageService, private NewsServices:NewsServices) {
+    this.showinfo = false;
+    if (sessionStorage.getItem('page')) {
       this.loadNewsforType('Nacionales');
       sessionStorage.removeItem('page');
     }
     this.subscription = this.messageService.getMessage().subscribe(message => {
       if (message) {
         this.message = message.text;
-          this.loadNewsforType(this.message);
-      } 
-    ;
+        this.loadNewsforType(this.message);
+      }
+      ;
     });
   }
 
-  loadNewsforType(message:string){
-    console.log(message);
-    this.showinfo =  true;
+  loadNewsforType(message: string) {
+    this.NewsServices.requestNews(message).subscribe(res=>{
+      console.log(res);
+    });
+    this.showinfo = true;
   }
 
   ngOnDestroy() {
