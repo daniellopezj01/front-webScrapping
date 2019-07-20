@@ -1,7 +1,7 @@
 import { NewsServices } from './../../services/NewsServices';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-
+import { Router } from '@angular/router';
 import { MessageService } from '../../services/MessageService';
 
 @Component({
@@ -14,10 +14,10 @@ export class HomeComponent implements OnInit {
   message: string = "national";
   subscription: Subscription;
   showinfo: boolean;
-  listInfo:any;
+  listInfo: any;
 
-  constructor(private messageService: MessageService, private NewsServices:NewsServices) {
-    this.showinfo = false;   
+  constructor(private messageService: MessageService, private _router: Router, private NewsServices: NewsServices) {
+    this.showinfo = false;
     this.subscription = this.messageService.getMessage().subscribe(message => {
       if (message) {
         this.message = message.text;
@@ -29,8 +29,8 @@ export class HomeComponent implements OnInit {
 
   loadNewsforType(message: string) {
     this.showinfo = false;
-    this.NewsServices.requestNews(message).subscribe(res=>{
-      this.listInfo =  res;
+    this.NewsServices.requestNews(message).subscribe(res => {
+      this.listInfo = res;
     });
     this.showinfo = true;
   }
@@ -41,6 +41,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.loadNewsforType('national');
-    console.log("entre a oninit");
+  }
+
+  newsSelect(news: string) {
+    sessionStorage.setItem('url', JSON.stringify(news));
+    this._router.navigate([`/showNew`]);
   }
 }

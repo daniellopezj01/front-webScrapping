@@ -1,11 +1,12 @@
 <mat-spinner class="spinner" *ngIf="!showinfo"></mat-spinner>
 <br><br>
 <br>
+<br><br>
+<br>
 <br>
 <div *ngIf="showinfo" class="container">
     <h1> <strong>
-        Meet the latest about {{message}} </strong> </h1>
-    <br>
+       <b> Meet the latest about {{message}}</b> </strong> </h1>
     <br>
     <br>
     <br>
@@ -14,16 +15,18 @@
             <div class=" offset-md-1  offset-lg-1 col-lg-5  col-md-11 col-sm-12  my-5 " style="float: left; ">
                 <mat-card class="example-card border border-dark">
                     <mat-card-header>
-                        <div mat-card-avatar class="example-header-image"></div>
+                        <div>
+                            <p> <strong><b> {{item.fecha}} </b>  </strong> </p>
+                        </div>
                     </mat-card-header>
                     <div style="height:  250px; width:  100%;">
-                        <img style="height:  250px; width:  100%;" mat-card-image src="{{item.img}}" alt="Photo of a Shiba Inu">
+                        <a (click)="newsSelect(item.url)"> <img style="height:  250px; width:  100%;" mat-card-image src="{{item.img}}" alt="Photo of a Shiba Inu">
+                        </a>
                     </div>
                     <mat-card-content style="height: 200px">
-                        <mat-card-title> {{item.titulo}}</mat-card-title>
-                        <p>
-                            {{item.descripcion}}
-                        </p>
+                        <mat-card-title> <a (click)="newsSelect(item.url)"> {{item.titulo}} </a></mat-card-title>
+                        <p class="text-body" style="font-size: 16px"> {{item.descripcion.slice(0, 225)}}</p>
+
                     </mat-card-content>
                 </mat-card>
             </div>

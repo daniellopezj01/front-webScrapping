@@ -4,6 +4,7 @@ import { Observable, Subject } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class MessageService {
     private subject = new Subject<any>();
+    private subjecturl = new Subject<any>();
 
     sendMessage(message: string) {
         this.subject.next({ text: message });
@@ -11,6 +12,14 @@ export class MessageService {
 
     clearMessages() {
         this.subject.next();
+    }
+
+    sendurl(message: string) {
+        this.subjecturl.next({ text: message });
+    }
+
+    geturl(): Observable<any> {
+        return this.subjecturl.asObservable();
     }
 
     getMessage(): Observable<any> {
