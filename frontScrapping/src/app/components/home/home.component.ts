@@ -11,13 +11,13 @@ import { MessageService } from '../../services/MessageService';
 })
 
 export class HomeComponent implements OnInit {
-  message: string = "Nacionales";
+  message: string = "national";
   subscription: Subscription;
   showinfo: boolean;
   listInfo:any;
 
   constructor(private messageService: MessageService, private NewsServices:NewsServices) {
-    this.showinfo = false;
+    this.showinfo = false;   
     this.subscription = this.messageService.getMessage().subscribe(message => {
       if (message) {
         this.message = message.text;
@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
   }
 
   loadNewsforType(message: string) {
+    this.showinfo = false;
     this.NewsServices.requestNews(message).subscribe(res=>{
       this.listInfo =  res;
     });
@@ -39,6 +40,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadNewsforType('Nacionales');
+    this.loadNewsforType('national');
+    console.log("entre a oninit");
   }
 }
